@@ -3,7 +3,9 @@
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
      <title>INI files</title>
      <link href="global.css" rel="stylesheet" type="text/css">
-
+<!--
+     <link rel="shortcut icon" href="logo.png" />
+-->
      <link rel="shortcut icon" href="etsiiull.png" type="image/x-icon">
 
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
