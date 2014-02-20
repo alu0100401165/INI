@@ -1,11 +1,21 @@
 "use strict"; // Use ECMAScript 5 strict mode in browsers that support it
 
+$(document).ready(window.onload);
+
 $(document).ready(function() {
    $("#fileinput").change(calculate);
 });
 
 function calculate(evt) {
-  var f = evt.target.files[0]; 
+   var f;
+  if(evt.type != "drop")
+    f = evt.target.files[0];
+  else{
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.target.style.background = "none";
+    f = evt.dataTransfer.files[0];
+  }
 
   if (f) {
     var r = new FileReader();
@@ -18,6 +28,12 @@ function calculate(evt) {
       out.className = 'unhidden';
       initialinput.innerHTML = contents;
       finaloutput.innerHTML = pretty;
+      
+       if (window.localStorage){
+	   localStorage.fileinput = f;
+	   localStorage.initialinput = contents;
+	   localStorage.finaloutput = pretty;
+      } 
     }
     r.readAsText(f);
   } else { 
@@ -77,3 +93,12 @@ function lexer(input) {
   return out;
 }
 
+window.onload = function() {
+  
+  if (window.localStorage && localStorage.initialinput && localStorage.finaloutput) {
+    document.getElementById("out").className = "unhidden";
+    document.getElementById("fileinput").innerHTML = localStorage.fileinput;
+    document.getElementById("initialinput").innerHTML = localStorage.initialinput;
+    document.getElementById("finaloutput").innerHTML = localStorage.finaloutput;
+  }
+};
